@@ -704,7 +704,7 @@
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </div>
-      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=Portfolio%20Contact&body=Hi%20Selvi%2C%0A%0AI%20saw%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener">Let's connect</a>
+      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com" target="_blank" rel="noopener">Let's connect</a>
     </nav>
   </header>
 
@@ -1152,11 +1152,7 @@
   </script>
 
   <script>
-    // Simple contact submit via FormSubmit (no backend needed)
-    // Using FormSubmit endpoint token (activated) to deliver directly to inbox
-    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/71de8c484f19744cefcee521823d3fb9e';
-
-    // Contact Form Handler
+    // Contact Form Handler - Opens Gmail compose directly
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -1170,53 +1166,29 @@
       const subject = document.getElementById('project-subject').value;
       const message = document.getElementById('message').value;
 
-      // Disable submit button
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      // Create Gmail compose link with all form data
+      const subjectLine = encodeURIComponent('Portfolio Contact: ' + (subject || name));
+      const body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Subject: ' + (subject || 'Not specified') + '\n\n' +
+        'Message:\n' + message
+      );
+      
+      // Open Gmail compose window
       statusDiv.style.display = 'block';
-      statusDiv.innerHTML = '<p style="color: var(--muted);">Sending message...</p>';
-
-      // Send via FormSubmit using FormData (more reliable delivery)
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('subject', subject || 'No subject');
-      formData.append('message', message);
-      formData.append('_replyto', email);
-      formData.append('_subject', `Portfolio Contact: ${subject || name}`);
-      formData.append('_captcha', 'false');
-
-      fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      })
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to send');
-        statusDiv.innerHTML = '<p style="color: #4ade80;">✅ Message sent! I\'ll confirm soon.</p>';
+      statusDiv.innerHTML = '<p style="color: var(--accent);">Opening Gmail... Please send the email to complete.</p>';
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=${subjectLine}&body=${body}`, '_blank');
+      
+      // Reset form after a short delay
+      setTimeout(() => {
         form.reset();
-      })
-      .catch(() => {
-        // Fallback: open Gmail compose
-        const subjectLine = encodeURIComponent('Portfolio Contact: ' + (subject || name));
-        const body = encodeURIComponent(
-          'Name: ' + name + '\n' +
-          'Email: ' + email + '\n' +
-          'Subject: ' + (subject || 'Not specified') + '\n\n' +
-          'Message:\n' + message
-        );
-        statusDiv.innerHTML = '<p style="color: var(--accent);">Opening Gmail... click send to finish.</p>';
-        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=${subjectLine}&body=${body}`, '_blank');
-      })
-      .finally(() => {
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Send message';
+        statusDiv.innerHTML = '<p style="color: #4ade80;">✅ Gmail opened! Please send the email.</p>';
         setTimeout(() => {
           statusDiv.style.display = 'none';
-        }, 5000);
-      });
+        }, 3000);
+      }, 500);
     });
   </script>
 </body>
