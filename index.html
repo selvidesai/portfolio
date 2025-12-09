@@ -704,7 +704,7 @@
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
       </div>
-      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com" target="_blank" rel="noopener">Let's connect</a>
+      <a class="btn" href="mailto:selvidesai18@gmail.com?subject=Portfolio%20Contact" target="_blank" rel="noopener">Let's connect</a>
     </nav>
   </header>
 
@@ -1152,7 +1152,7 @@
   </script>
 
   <script>
-    // Contact Form Handler - Opens Gmail compose directly
+    // Contact Form Handler - Opens email app directly using mailto
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -1166,7 +1166,7 @@
       const subject = document.getElementById('project-subject').value;
       const message = document.getElementById('message').value;
 
-      // Create Gmail compose link with all form data
+      // Create mailto link with all form data
       const subjectLine = encodeURIComponent('Portfolio Contact: ' + (subject || name));
       const body = encodeURIComponent(
         'Name: ' + name + '\n' +
@@ -1175,16 +1175,16 @@
         'Message:\n' + message
       );
       
-      // Open Gmail compose window
+      // Open email app using mailto (works on all devices)
       statusDiv.style.display = 'block';
-      statusDiv.innerHTML = '<p style="color: var(--accent);">Opening Gmail... Please send the email to complete.</p>';
-      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=${subjectLine}&body=${body}`, '_blank');
+      statusDiv.innerHTML = '<p style="color: var(--accent);">Opening email app... Please send the email.</p>';
+      window.location.href = `mailto:selvidesai18@gmail.com?subject=${subjectLine}&body=${body}`;
       
       // Reset form after a short delay
       setTimeout(() => {
         form.reset();
         submitBtn.disabled = false;
-        statusDiv.innerHTML = '<p style="color: #4ade80;">✅ Gmail opened! Please send the email.</p>';
+        statusDiv.innerHTML = '<p style="color: #4ade80;">✅ Email app opened! Please send the email.</p>';
         setTimeout(() => {
           statusDiv.style.display = 'none';
         }, 3000);
