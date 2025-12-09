@@ -1158,38 +1158,39 @@
     // Contact Form Handler
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       const submitBtn = document.getElementById('submit-btn');
       const statusDiv = document.getElementById('form-status');
       const form = this;
-      
+
       // Get form values
       const name = document.getElementById('sender-name').value;
       const email = document.getElementById('sender-email').value;
       const subject = document.getElementById('project-subject').value;
       const message = document.getElementById('message').value;
-      
+
       // Disable submit button
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending...';
       statusDiv.style.display = 'block';
       statusDiv.innerHTML = '<p style="color: var(--muted);">Sending message...</p>';
-      
-      // Send via FormSubmit (serverless)
+
+      // Send via FormSubmit using FormData (more reliable delivery)
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject || 'No subject');
+      formData.append('message', message);
+      formData.append('_replyto', email);
+      formData.append('_subject', `Portfolio Contact: ${subject || name}`);
+      formData.append('_captcha', 'false');
+
       fetch(FORM_ENDPOINT, {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
           'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          subject: subject || 'No subject',
-          message,
-          _subject: `Portfolio Contact: ${subject || name}`,
-          _replyto: email
-        })
+        }
       })
       .then(res => {
         if (!res.ok) throw new Error('Failed to send');
