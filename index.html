@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selvi | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050511;
+      --card: #0f0f23;
+      --muted: #b8bfd4;
+      --accent: #7c6cf6;
+      --accent-2: #5bd1f5;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      --max-width: 1100px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 108, 246, 0.08), transparent 35%), radial-gradient(circle at 80% 0%, rgba(91, 209, 245, 0.08), transparent 40%), var(--bg);
+      color: white;
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 5, 17, 0.75);
+      border-bottom: 1px solid var(--border);
+      z-index: 10;
+    }
+
+    nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand span {
+      display: inline-flex;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      align-items: center;
+      justify-content: center;
+      color: #050511;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-weight: 500;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #050511;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: white;
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 48px 20px 80px;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero {
+      padding-top: 40px;
+      display: grid;
+      place-items: center;
+      min-height: calc(100vh - 140px);
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(124, 108, 246, 0.12);
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 32px);
+      margin-bottom: 10px;
+    }
+
+    p.lead {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      position: relative;
+      background: radial-gradient(circle at 20% 20%, rgba(124, 108, 246, 0.2), transparent 45%), var(--card);
+      border-radius: 20px;
+      padding: 32px;
+      min-height: 320px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      width: min(760px, 100%);
+      animation: floatIn 0.9s ease forwards, subtleFloat 8s ease-in-out 1.5s infinite alternate;
+    }
+
+    .blob {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(91, 209, 245, 0.55), rgba(124, 108, 246, 0.2));
+      filter: blur(60px);
+      top: -60px;
+      right: -60px;
+      opacity: 0.8;
+    }
+
+    .hero-card-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--muted);
+      flex-wrap: wrap;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .animate-fade {
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .animate-fade.delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .animate-fade.delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .animate-fade.delay-3 {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes subtleFloat {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.15s ease, border-color 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124, 108, 246, 0.6);
+    }
+
+    .card .title {
+      font-weight: 700;
+    }
+
+    .card .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .projects .card {
+      gap: 14px;
+    }
+
+    .project-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .timeline {
+      border-left: 2px solid var(--border);
+      padding-left: 18px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 0 4px rgba(124, 108, 246, 0.15);
+    }
+
+    .contact-card {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-card form {
+      display: grid;
+      gap: 12px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: white;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 20px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .video-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 10px;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .video-frame iframe,
+    .video-frame video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+
+    .video-upload-area {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(15, 15, 35, 0.8);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 2px dashed var(--border);
+    }
+
+    .video-upload-area:hover {
+      background: rgba(124, 108, 246, 0.1);
+      border-color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .video-upload-area.has-video {
+      display: none;
+    }
+
+    .upload-icon {
+      font-size: 48px;
+      color: var(--accent);
+    }
+
+    .upload-text {
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .upload-hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: -8px;
+    }
+
+    .upload-btn {
+      margin-top: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #050511;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .upload-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .owner-only {
+      display: none;
+    }
+
+    .owner-only.active {
+      display: flex;
+    }
+
+    .password-prompt {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 30px;
+      z-index: 1000;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .password-prompt.active {
+      display: block;
+    }
+
+    .password-prompt h3 {
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .password-prompt input {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+
+    .password-prompt .btn-group {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(124, 108, 246, 0.15);
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--accent);
+      margin-left: 10px;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .video-title-input,
+    .video-desc-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+      color: white;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .video-title-input {
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .video-desc-input {
+      font-size: 13px;
+      min-height: 40px;
+      resize: vertical;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .grid-two {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        position: fixed;
+        width: 100%;
+      }
+
+      main {
+        padding-top: 120px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <div class="brand"><span>S</span>Selvi's Portfolio</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#reel">Videos</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=Portfolio%20Contact&body=Hi%20Selvi,%0D%0A%0D%0A" target="_blank" rel="noopener">Let's connect</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-card">
+        <div class="blob"></div>
+        <div class="hero-card-content">
+          <div class="eyebrow animate-fade">👋 Hi, I’m Selvi</div>
+          <h1 class="animate-fade delay-1">Developer and<br>Video editor</h1>
+          <p class="lead animate-fade delay-2">I’m a developer and video editor who builds modern applications using Python and Java, and I
+            have hands-on experience in AI and machine learning. I also create high-quality video content,I turn raw
+            footage into compelling visuals.</p>
+          <div class="hero-actions animate-fade delay-3">
+            <a class="btn" href="#projects">View projects</a>
+            <a class="btn secondary" href="#reel">Editing work (video)</a>
+          </div>
+          <div class="hero-meta animate-fade delay-3">
+            <span>Available for freelance</span> • <span>Remote/Onsite</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-header">
+        <div>
+          <h2>About me</h2>
+          <p>IT engineer and video creator.</p>
+        </div>
+      </div>
+      <div class="grid-two" style="gap:22px;">
+        <div class="card">
+          <div class="title">What I do</div>
+          <p class="muted">IT engineer with strong knowledge in AI and machine learning, along with a growing skill set
+            in software development. I’m also a video creator who produces high-quality content, turning raw footage
+            into compelling.</p>
+        </div>
+        <div class="card">
+          <div class="title">How I work</div>
+          <p class="muted">User-focused and goal-oriented. I focus on interactions, test ideas early, and refine details
+            to create engaging software and video experiences.".</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="section-header">
+        <div>
+          <h2>Skills</h2>
+          <p>Tools and technologies I rely on to design, build, and ship.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="title">Programming & Development</div>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span
+              class="tag">HTML</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="title">Video Creation & Editing</div>
+          <div class="tags">
+            <span class="tag">CapCut</span><span class="tag">VN</span><span class="tag">Flipaclip</span><span
+              class="tag">Canva</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="projects">
+      <div class="section-header">
+        <div>
+          <h2>Featured projects</h2>
+          <p>A snapshot of recent work. Links can point to live demos or repos.</p><br><br>
+
+      <div class="cards">
+        <div class="card">
+          <div class="title">Face Recognition Attendance System</div>
+          <p class="muted">Developed during internship—this project focuses on real-time face detection, recognizing
+            employees, and maintaining accurate attendance logs. Designed to improve workplace automation.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Java</span><span
+              class="tag">MachineLearning</span></div>
+          <div class="project-actions">
+
+          </div>
+        </div>
+        <div class="card">
+          <div class="title">Chatbot Using NLP & Machine Learning</div>
+          <p class="muted">AI-powered chatbot that understands user intent using Natural Language Processing, text
+            preprocessing, and ML-based classification. It responds intelligently, handles multi-turn conversations, and
+            improves accuracy through training data.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">MachineLearning</span><span
+              class="tag">NLP</span></div>
+
+
+        </div>
+
+
+      </div>
+    </section>
+
+    <section id="reel">
+      <div class="section-header">
+        <div>
+          <h2>Video reel</h2>
+          <p>Featured video edits and motion work. <span id="owner-status"></span>
+          </p>
+        </div>
+
+      </div>
+      <div class="video-grid">
+        <div class="video-card" data-video-id="1">
+          <div class="video-frame">
+            <div class="video-upload-area owner-only" id="upload-area-1" onclick="checkOwnerAccess(1)">
+              <div class="upload-icon">📹</div>
+              <div class="upload-text">Click to Upload Video</div>
+              <div class="upload-hint">Select from your gallery or files</div>
+              <button class="upload-btn" onclick="event.stopPropagation(); checkOwnerAccess(1)">Choose Video</button>
+            </div>
+            <video controls id="video-player-1" style="display: none;">
+              Your browser does not support the video tag.
+            </video>
+            <input type="file" id="video-upload-1" class="file-input" accept="video/*" onchange="handleVideoUpload(1, this)">
+          </div>
+          <input type="text" class="video-title-input owner-only" id="video-title-1" placeholder="Video Title" value="Video 1" style="display: none;">
+          <textarea class="video-desc-input owner-only" id="video-desc-1" placeholder="Add your video description here" style="display: none;">Add your video description here</textarea>
+          <div class="title" id="display-title-1" style="display: block;">Video 1</div>
+          <p class="muted" id="display-desc-1" style="display: block;">Add your video description here</p>
+        </div>
+        <div class="video-card" data-video-id="2">
+          <div class="video-frame">
+            <div class="video-upload-area owner-only" id="upload-area-2" onclick="checkOwnerAccess(2)">
+              <div class="upload-icon">📹</div>
+              <div class="upload-text">Click to Upload Video</div>
+              <div class="upload-hint">Select from your gallery or files</div>
+              <button class="upload-btn" onclick="event.stopPropagation(); checkOwnerAccess(2)">Choose Video</button>
+            </div>
+            <video controls id="video-player-2" style="display: none;">
+              Your browser does not support the video tag.
+            </video>
+            <input type="file" id="video-upload-2" class="file-input" accept="video/*" onchange="handleVideoUpload(2, this)">
+          </div>
+          <input type="text" class="video-title-input owner-only" id="video-title-2" placeholder="Video Title" value="Video 2" style="display: none;">
+          <textarea class="video-desc-input owner-only" id="video-desc-2" placeholder="Add your video description here" style="display: none;">Add your video description here</textarea>
+          <div class="title" id="display-title-2" style="display: block;">Video 2</div>
+          <p class="muted" id="display-desc-2" style="display: block;">Add your video description here</p>
+        </div>
+        <div class="video-card" data-video-id="3">
+          <div class="video-frame">
+            <div class="video-upload-area owner-only" id="upload-area-3" onclick="checkOwnerAccess(3)">
+              <div class="upload-icon">📹</div>
+              <div class="upload-text">Click to Upload Video</div>
+              <div class="upload-hint">Select from your gallery or files</div>
+              <button class="upload-btn" onclick="event.stopPropagation(); checkOwnerAccess(3)">Choose Video</button>
+            </div>
+            <video controls id="video-player-3" style="display: none;">
+              Your browser does not support the video tag.
+            </video>
+            <input type="file" id="video-upload-3" class="file-input" accept="video/*" onchange="handleVideoUpload(3, this)">
+          </div>
+          <input type="text" class="video-title-input owner-only" id="video-title-3" placeholder="Video Title" value="Video 3" style="display: none;">
+          <textarea class="video-desc-input owner-only" id="video-desc-3" placeholder="Add your video description here" style="display: none;">Add your video description here</textarea>
+          <div class="title" id="display-title-3" style="display: block;">Video 3</div>
+          <p class="muted" id="display-desc-3" style="display: block;">Add your video description here</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-header">
+        <div>
+          <h2>Experience</h2>
+          <p>Recent roles and highlights.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="title">Face Recognition Developer — BITFRONT INFOTECH</div>
+          <div class="muted">2023 — Present</div>
+          <p class="muted">Created an NLP-based chatbot using machine learning, intent detection, and text
+            preprocessing.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="title">ML/NLP Developer —Hit Infotech LTD</div>
+          <div class="muted">2024</div>
+          <p class="muted">Created an NLP-based chatbot using machine learning, intent detection, and text
+            preprocessing.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="title">Program training — MORSY Multimedia & Education</div>
+          <div class="muted">2022</div>
+          <p class="muted">Completed C-language training focusing on logic building, algorithms, and structured
+            programming.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-header">
+        <div>
+          <h2>Contact</h2>
+          <p>Tell me about your project or just say hi. I’ll get back within 24h.</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div>
+          <div class="title">Let’s build something great</div>
+          <p class="muted">Email: selvidesai18@gmail.com<br>Location: Remote, open to travel</p>
+  
+        </div>
+        <form id="contact-form">
+          <input type="text" id="sender-name" name="name" placeholder="Your name" required>
+          <input type="email" id="sender-email" name="email" placeholder="Your Email" required>
+          <input type="text" id="project-subject" name="subject" placeholder="Subject" required>
+          <textarea id="message" name="message" placeholder="Description" required></textarea>
+          <button class="btn" type="submit" id="submit-btn">Send message</button>
+          <div id="form-status" style="margin-top: 12px; display: none;"></div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Password Prompt Modal -->
+  <div class="password-prompt" id="password-prompt">
+    <h3>Owner Access Required</h3>
+    <p class="muted" style="margin-bottom: 16px;">Enter password to upload videos</p>
+    <input type="password" id="owner-password" placeholder="Enter password" autofocus>
+    <div class="btn-group">
+      <button class="btn secondary" onclick="closePasswordPrompt()">Cancel</button>
+      <button class="btn" onclick="verifyOwner()">Verify</button>
+    </div>
+  </div>
+
+  <footer>
+   THANK YOU FOR VISITING MY PORTFOLIO! 
+  </footer>
+
+  <script>
+    // CHANGE THIS PASSWORD TO YOUR OWN SECURE PASSWORD
+    const OWNER_PASSWORD = "portfolio2025"; // Change this!
+    let isOwner = false;
+    let pendingVideoId = null;
+
+    // Check if user is already verified as owner
+    function checkOwnerStatus() {
+      const saved = localStorage.getItem('isOwner');
+      if (saved === 'true') {
+        isOwner = true;
+        showOwnerUI();
+      } else {
+        hideOwnerUI();
+      }
+    }
+
+    // Show owner UI (upload buttons, edit fields)
+    function showOwnerUI() {
+      document.querySelectorAll('.owner-only').forEach(el => {
+        el.classList.add('active');
+        el.style.display = el.classList.contains('video-title-input') || el.classList.contains('video-desc-input') ? 'block' : 'flex';
+      });
+      document.querySelectorAll('[id^="display-"]').forEach(el => el.style.display = 'none');
+      document.getElementById('owner-status').innerHTML = '<span class="admin-badge">🔒 Owner Mode</span>';
+    }
+
+    // Hide owner UI (show read-only view)
+    function hideOwnerUI() {
+      document.querySelectorAll('.owner-only').forEach(el => {
+        el.classList.remove('active');
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('[id^="display-"]').forEach(el => el.style.display = 'block');
+      document.getElementById('owner-status').innerHTML = '';
+    }
+
+    // Check owner access when clicking upload
+    function checkOwnerAccess(videoId) {
+      if (isOwner) {
+        document.getElementById(`video-upload-${videoId}`).click();
+      } else {
+        pendingVideoId = videoId;
+        document.getElementById('password-prompt').classList.add('active');
+        document.getElementById('owner-password').focus();
+      }
+    }
+
+    // Verify owner password
+    function verifyOwner() {
+      const password = document.getElementById('owner-password').value;
+      if (password === OWNER_PASSWORD) {
+        isOwner = true;
+        localStorage.setItem('isOwner', 'true');
+        closePasswordPrompt();
+        showOwnerUI();
+        if (pendingVideoId) {
+          document.getElementById(`video-upload-${pendingVideoId}`).click();
+          pendingVideoId = null;
+        }
+      } else {
+        alert('Incorrect password!');
+        document.getElementById('owner-password').value = '';
+        document.getElementById('owner-password').focus();
+      }
+    }
+
+
+    function closePasswordPrompt() {
+      document.getElementById('password-prompt').classList.remove('active');
+      document.getElementById('owner-password').value = '';
+      pendingVideoId = null;
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && document.getElementById('password-prompt').classList.contains('active')) {
+        verifyOwner();
+      }
+    });
+
+    checkOwnerStatus();
+  </script>
+
+  <script>
+    function handleVideoUpload(videoId, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+
+      if (!file.type.startsWith('video/')) {
+        alert('Please select a video file');
+        return;
+      }
+
+
+      const videoUrl = URL.createObjectURL(file);
+      const videoPlayer = document.getElementById(`video-player-${videoId}`);
+      const uploadArea = videoPlayer.parentElement.querySelector('.video-upload-area');
+
+    
+      videoPlayer.src = videoUrl;
+      videoPlayer.style.display = 'block';
+      uploadArea.classList.add('has-video');
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const videoData = {
+          url: videoUrl,
+          name: file.name,
+          type: file.type,
+          size: file.size
+        };
+        localStorage.setItem(`video-${videoId}`, JSON.stringify(videoData));
+      };
+      reader.readAsDataURL(file);
+
+      // Auto-update title with filename (without extension)
+      const titleInput = document.getElementById(`video-title-${videoId}`);
+      const displayTitle = document.getElementById(`display-title-${videoId}`);
+      if (titleInput.value === `Video ${videoId}` || titleInput.value === '') {
+        const fileName = file.name.replace(/\.[^/.]+$/, '');
+        titleInput.value = fileName;
+        if (displayTitle) displayTitle.textContent = fileName;
+        localStorage.setItem(`video-title-${videoId}`, fileName);
+      }
+    }
+
+    // Load saved videos on page load (visible to all users)
+    window.addEventListener('DOMContentLoaded', function() {
+      for (let i = 1; i <= 3; i++) {
+        const saved = localStorage.getItem(`video-${i}`);
+        if (saved) {
+          try {
+            const videoData = JSON.parse(saved);
+            const videoPlayer = document.getElementById(`video-player-${i}`);
+            const uploadArea = videoPlayer.parentElement.querySelector('.video-upload-area');
+            
+            if (videoData.url) {
+              videoPlayer.src = videoData.url;
+              videoPlayer.style.display = 'block';
+              if (uploadArea) uploadArea.classList.add('has-video');
+            }
+          } catch (e) {
+            console.error('Error loading saved video:', e);
+          }
+        }
+      }
+    });
+
+    // Save title and description changes
+    document.addEventListener('input', function(e) {
+      if (e.target.classList.contains('video-title-input') || e.target.classList.contains('video-desc-input')) {
+        const videoId = e.target.id.match(/\d+/)[0];
+        const title = document.getElementById(`video-title-${videoId}`).value;
+        const desc = document.getElementById(`video-desc-${videoId}`).value;
+        localStorage.setItem(`video-title-${videoId}`, title);
+        localStorage.setItem(`video-desc-${videoId}`, desc);
+        
+        // Update display elements for non-owners
+        const displayTitle = document.getElementById(`display-title-${videoId}`);
+        const displayDesc = document.getElementById(`display-desc-${videoId}`);
+        if (displayTitle) displayTitle.textContent = title;
+        if (displayDesc) displayDesc.textContent = desc;
+      }
+    });
+
+    // Load saved titles and descriptions
+    window.addEventListener('DOMContentLoaded', function() {
+      for (let i = 1; i <= 3; i++) {
+        const savedTitle = localStorage.getItem(`video-title-${i}`);
+        const savedDesc = localStorage.getItem(`video-desc-${i}`);
+        if (savedTitle) {
+          const titleInput = document.getElementById(`video-title-${i}`);
+          const displayTitle = document.getElementById(`display-title-${i}`);
+          if (titleInput) titleInput.value = savedTitle;
+          if (displayTitle) displayTitle.textContent = savedTitle;
+        }
+        if (savedDesc) {
+          const descInput = document.getElementById(`video-desc-${i}`);
+          const displayDesc = document.getElementById(`display-desc-${i}`);
+          if (descInput) descInput.value = savedDesc;
+          if (displayDesc) displayDesc.textContent = savedDesc;
+        }
+      }
+    });
+  </script>
+
+  <script>
+    // Simple contact submit via FormSubmit (no backend needed)
+    const FORM_ENDPOINT = 'https://formsubmit.co/ajax/selvidesai18@gmail.com';
+
+    // Contact Form Handler
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const submitBtn = document.getElementById('submit-btn');
+      const statusDiv = document.getElementById('form-status');
+      const form = this;
+      
+      // Get form values
+      const name = document.getElementById('sender-name').value;
+      const email = document.getElementById('sender-email').value;
+      const subject = document.getElementById('project-subject').value;
+      const message = document.getElementById('message').value;
+      
+      // Disable submit button
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<p style="color: var(--muted);">Sending message...</p>';
+      
+      // Send via FormSubmit (serverless)
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          subject: subject || 'No subject',
+          message,
+          _subject: `Portfolio Contact: ${subject || name}`,
+          _replyto: email
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to send');
+        statusDiv.innerHTML = '<p style="color: #4ade80;">✅ Message sent! I\'ll confirm soon.</p>';
+        form.reset();
+      })
+      .catch(() => {
+        // Fallback: open Gmail compose
+        const subjectLine = encodeURIComponent('Portfolio Contact: ' + (subject || name));
+        const body = encodeURIComponent(
+          'Name: ' + name + '\n' +
+          'Email: ' + email + '\n' +
+          'Subject: ' + (subject || 'Not specified') + '\n\n' +
+          'Message:\n' + message
+        );
+        statusDiv.innerHTML = '<p style="color: var(--accent);">Opening Gmail... click send to finish.</p>';
+        window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=${subjectLine}&body=${body}`, '_blank');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
+        setTimeout(() => {
+          statusDiv.style.display = 'none';
+        }, 5000);
+      });
+    });
+  </script>
+</body>
+
+</html>
