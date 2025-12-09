@@ -59,6 +59,41 @@
       gap: 16px;
     }
 
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: white;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: white;
+      border-radius: 999px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    nav.nav-open .nav-toggle span:nth-child(1) {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    nav.nav-open .nav-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    nav.nav-open .nav-toggle span:nth-child(3) {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
     .brand {
       font-weight: 700;
       letter-spacing: 0.5px;
@@ -607,8 +642,33 @@
 
     @media (max-width: 768px) {
       nav {
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .nav-toggle {
+        display: inline-flex;
+        margin-left: auto;
+      }
+
+      .nav-links {
+        width: 100%;
+        display: none;
         flex-direction: column;
         align-items: flex-start;
+        gap: 12px;
+        padding: 10px 0 6px;
+        border-top: 1px solid var(--border);
+      }
+
+      nav.nav-open .nav-links {
+        display: flex;
+      }
+
+      nav .btn {
+        width: 100%;
+        justify-content: center;
       }
 
       .grid-two {
@@ -631,6 +691,11 @@
   <header>
     <nav>
       <div class="brand"><span>S</span>Selvi's Portfolio</div>
+      <button class="nav-toggle" aria-label="Toggle navigation" type="button">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
@@ -642,6 +707,26 @@
       <a class="btn" href="https://mail.google.com/mail/?view=cm&fs=1&to=selvidesai18@gmail.com&su=Portfolio%20Contact&body=Hi%20Selvi,%0D%0A%0D%0A" target="_blank" rel="noopener">Let's connect</a>
     </nav>
   </header>
+
+  <script>
+    // Mobile nav toggle
+    const nav = document.querySelector('nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (nav && navToggle) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.addEventListener('click', () => {
+        nav.classList.toggle('nav-open');
+        const isOpen = nav.classList.contains('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+      nav.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
 
   <main>
     <section class="hero" id="home">
